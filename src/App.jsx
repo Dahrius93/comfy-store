@@ -17,8 +17,8 @@ import {
 import { ErrorElement } from "./components";
 
 // loaders
-import { loader as landingPage } from "./pages/Landing";
-import { loader as singleProduct } from "./pages/SingleProduct";
+import { loader as landingLoader } from "./pages/Landing";
+import { loader as singleProductLoader } from "./pages/SingleProduct";
 
 // actions
 
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         index: true,
         element: <Landing />,
         errorElement: <ErrorElement />,
-        loader: landingPage, // prima di visualizzare la pagina fetch dei dati
+        loader: landingLoader, // prima di visualizzare la pagina fetch dei dati
       },
       {
         path: "products",
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "products/:id",
         element: <SingleProduct />,
-        loader: singleProduct,
+        loader: singleProductLoader,
       },
       {
         path: "cart",
