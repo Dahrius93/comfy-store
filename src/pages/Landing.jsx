@@ -1,4 +1,4 @@
-import { Hero } from "../components";
+import { Hero, FeaturedProduct } from "../components";
 
 import { customFetch } from "../utils";
 
@@ -8,6 +8,7 @@ const url = "/products?featured=true";
 // definito su app.js
 // customFetch è axios definito con baseUrl su ../utils
 // destrutturo per essere chiaro cosa restituisce questo loader
+// utilizzo i dati del loader su FeaturedProduct -> ProductGrid
 export const loader = async () => {
   const response = await customFetch(url);
   const products = response.data.data;
@@ -18,6 +19,7 @@ const Landing = () => {
   return (
     <>
       <Hero />
+      <FeaturedProduct />
     </>
   );
 };
