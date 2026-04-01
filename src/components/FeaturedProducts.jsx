@@ -1,4 +1,4 @@
-import ProductsGrid from "./ProductGrid";
+import ProductsGrid from "./ProductsGrid";
 import SectionTitle from "./SectionTitle";
 
 const FeaturedProducts = () => {
