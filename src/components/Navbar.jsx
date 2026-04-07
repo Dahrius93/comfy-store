@@ -1,37 +1,18 @@
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import NavLinks from "../pages/NavLinks";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
-const themes = {
-  winter: "winter",
-  dracula: "dracula",
-};
-
-// leggo localstorage per stato iniziale useState
-const getThemeFromLocalStorage = () => {
-  return localStorage.getItem("theme") || themes.winter;
-};
+import NavLinks from "./NavLinks";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../features/user/userSlice";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(getThemeFromLocalStorage);
-  const hadleTheme = () => {
-    const { winter, dracula } = themes;
-    const newTheme = theme === winter ? dracula : winter;
-    document.documentElement.setAttribute("data-theme", newTheme);
-    setTheme(newTheme);
-  };
-
-  // salvo la preferenza su local storage
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  // useSelector legge i dati dallo store di React-redux
   const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
+
+  const dispatch = useDispatch();
+
+  const handleTheme = () => {
+    dispatch(toggleTheme());
+  };
 
   return (
     <nav className="bg-base-200">
@@ -64,11 +45,14 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {/* THEME ICONS */}
-          <label className="swap swap-rotate">
-            <input type="checkbox" onChange={hadleTheme} />
-            {/* sun icon*/}
-            <BsSunFill className="swap-on h-4 w-4 " />
-            {/* moon icon*/}
+          <label className="swap swap-rotate ">
+            {/* this hidden checkbox controls the state */}
+            <input type="checkbox" onChange={handleTheme} />
+
+            {/* sun icon */}
+            <BsSunFill className="swap-on h-4 w-4" />
+
+            {/* moon icon */}
             <BsMoonFill className="swap-off h-4 w-4" />
           </label>
           {/* CART LINK*/}
