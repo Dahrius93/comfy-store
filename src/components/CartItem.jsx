@@ -45,9 +45,9 @@ const CartItem = ({ cartItem }) => {
       </div>
       <div className="sm:ml-12">
         {/* AMOUNT */}
-        <div className="form-control max-w-xs">
+        <div className="fieldset max-w-xs">
           <label htmlFor="amount" className="label p-0">
-            <span className="label-text">Amount</span>
+            <span className="fieldset-label">Amount</span>
           </label>
           <select
             name="amount"

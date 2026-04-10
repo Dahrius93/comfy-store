@@ -79,7 +79,7 @@ const Login = () => {
           Not a member yet?{" "}
           <Link
             to="/register"
-            className="ml-2 link link-over link-primary capitalize"
+            className="ml-2 link link-hover link-primary capitalize"
           >
             register
           </Link>

@@ -2,7 +2,7 @@ const FormCheckbox = ({ label, name, defaultValue, size, shipping }) => {
   return (
     <div className="fieldset items-center">
       <label htmlFor={name} className="label cursor-pointer">
-        <span className="label-text capitalize">{label}</span>
+        <span className="fieldset-label capitalize">{label}</span>
       </label>
       <input
         type="checkbox"
