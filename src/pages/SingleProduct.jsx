@@ -93,7 +93,7 @@ const SingleProduct = () => {
             </div>
           </div>
           {/* AMOUNT */}
-          <div className="form-control w-full max-w-xs">
+          <div className="fieldset w-full max-w-xs">
             <label className="label">
               <h4 className="text-md font-medium tracking-wider capitalize">
                 amount
