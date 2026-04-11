@@ -9,7 +9,7 @@ import { clearCart } from "../features/cart/cartSlice";
 // request continene i dati del form inviato
 // infatti action viene triggerato quando viene inviato un form
 export const action =
-  (store) =>
+  (store, queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
     const { name, address } = Object.fromEntries(formData);
@@ -35,6 +35,7 @@ export const action =
           },
         },
       );
+      queryClient.removeQueries(["orders"]); // per aggiornare i dati altrimenti non vedo ultimo ordine
       store.dispatch(clearCart());
       toast.success("order placed successfully");
       return redirect("/orders");
