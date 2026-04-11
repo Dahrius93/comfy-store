@@ -5,6 +5,9 @@ import { customFetch, formatPrice } from "../utils";
 import { toast } from "react-toastify";
 import { clearCart } from "../features/cart/cartSlice";
 
+// store è il parametro passato all'action su App.jsx
+// request continene i dati del form inviato
+// infatti action viene triggerato quando viene inviato un form
 export const action =
   (store) =>
   async ({ request }) => {
@@ -17,8 +20,8 @@ export const action =
     const info = {
       name,
       address,
-      chargeTotal: orderTotal,
-      orderTotal: formatPrice(orderTotal),
+      chargeTotal: orderTotal, // num
+      orderTotal: formatPrice(orderTotal), // string formattata
       cartItems,
       numItemsInCart,
     };
