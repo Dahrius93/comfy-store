@@ -1,16 +1,15 @@
 import { Hero, FeaturedProduct } from "../components";
 
 import { customFetch } from "../utils";
-
 const url = "/products?featured=true";
 
-// loader è la funzione richiamata prima di visualizzare il componente
-// definito su app.js
-// customFetch è axios definito con baseUrl su ../utils
-// destrutturo per essere chiaro cosa restituisce questo loader
-// utilizzo i dati del loader su FeaturedProduct -> ProductGrid
-export const loader = async () => {
-  const response = await customFetch(url);
+const featuredProductsQuery = {
+  queryKey: ["featuredProducts"],
+  queryFn: () => customFetch(url),
+};
+
+export const loader = (queryClient) => async () => {
+  const response = await queryClient.ensureQueryData(featuredProductsQuery);
   const products = response.data.data;
   return { products };
 };

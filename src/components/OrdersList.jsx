@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import day from "dayjs";
+import day from "dayjs"; // day format
 import advancedFormat from "dayjs/plugin/advancedFormat";
 day.extend(advancedFormat);
 

@@ -2,20 +2,40 @@ import { Filters, PaginationContainer, ProductsContainer } from "../components";
 import { customFetch } from "../utils";
 
 const url = "/products";
-export const loader = async ({ request }) => {
-  // nel codice commentato un metodo per accedere ai parametri uno ad uno ma
-  // noi creiamo un oggetto per accedere a tutto.
-  // const params = new URL(request.url).searchParams
-  // const search = params.get('search')
 
-  const params = Object.fromEntries([
-    ...new URL(request.url).searchParams.entries(),
-  ]);
-  const response = await customFetch(url, { params });
-  const products = response.data.data;
-  const meta = response.data.meta; // dentro meta troviamo il numero totale di prodotti
-  return { products, meta, params };
+const allProductQuery = (queryParams) => {
+  const { search, category, company, sort, price, shipping, page } =
+    queryParams;
+
+  return {
+    queryKey: [
+      "product",
+      search ?? "",
+      category ?? "all",
+      company ?? "all",
+      sort ?? "a-z",
+      price ?? 100000,
+      shipping ?? false,
+      page ?? 1,
+    ],
+    queryFn: () =>
+      customFetch(url, {
+        params: queryParams,
+      }),
+  };
 };
+
+export const loader =
+  (queryClient) =>
+  async ({ request }) => {
+    const params = Object.fromEntries([
+      ...new URL(request.url).searchParams.entries(),
+    ]);
+    const response = await queryClient.ensureQueryData(allProductQuery(params));
+    const products = response.data.data;
+    const meta = response.data.meta;
+    return { products, meta, params };
+  };
 
 const Products = () => {
   return (
